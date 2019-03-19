@@ -10,7 +10,7 @@ glob.sync(PAGES_PATH +'/**/!(router).js' ).forEach(filepath => {
     if (!fs.existsSync(template)) {
         template = 'public/index.html'
     }
-    const pageEntry = path.relative(PAGES_PATH, filepath).replace('.js', '')
+    const pageEntry = path.relative(PAGES_PATH, filepath).replace('.js', '').split(path.sep).join('/')
     pages[pageEntry] = {
         entry: filepath,
         filename: `${pageEntry}.html`,
@@ -18,7 +18,7 @@ glob.sync(PAGES_PATH +'/**/!(router).js' ).forEach(filepath => {
     }
 })
 
-
+// console.log(pages)
 module.exports = {
     pages,
     chainWebpack: (config) => {
